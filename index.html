@@ -3,23 +3,34 @@
     <html>
     <head>
         <meta charset="UTF-8">
+        <!-- linked css file -->
         <link rel="stylesheet" href="./assets/css/style.css">
-        <title></title>
+        <!-- title of the page -->
+        <title>CODING QUIZ CHALLENGE</title>
          </head>
         <body>
-            <header>
-                <nav>
-                    <div>
-                        <h1></h1>
-                    </div>
-                        <ul>
-                            <li>></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                </nav>
-            </header>
+            <!-- division for heading 1 and 2. -->
+                <div>
+                    <h1>CODING QUIZ CHALLENGE</h1>
+                        <P>Answer the following questions within the time limit. every wrong answer will deduct 5 seconds from your time </P>
+                    <h2>QUESTIONS</h2>
+                </div>
+        
+            <div class="quiz">
+            <!-- created division for questions and answers  -->
+                <div id= "questions"></div>
+                <div id = "answers"></div>
+            </div>
+            <!--  -->
+
+            <!-- created  division for controls and created button to start quiz-->
+            <div class="controls">
+                <P>Time Remaining<span id="countdown"></span></P>
+                <button class="button" id="start-challenge">Start Quiz</button>
+            </div>
+                        
+              
+            <!-- javascript is linked below -->
             <script src="./script.js"></script>
         </body>
     
