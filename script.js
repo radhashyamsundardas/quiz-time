@@ -1,5 +1,5 @@
 
-// Adding questions for the quiz, Questions got from interviewbit.com
+// Adding questions and answers for the quiz, Questions got from interviewbit.com
 let quizQuestions = [
     { Question : "Which language is JAVASCRIPT?",
         Answer:{
@@ -37,3 +37,45 @@ let quizQuestions = [
         }, Answer: "const",
     },
 ];
+// finish writin question and answers
+
+// declaring variables through query selector.
+var startQuizEl = document.querySelectorAll("start-coding-quiz");
+var questions = document.querySelectorAll("questions");
+var solutions = document.querySelectorAll("answers");
+var tiktok = document.querySelectorAll("countdown");
+var result = document.querySelectorAll("score");
+var autograph = document.querySelectorAll("initial");
+var submit = document.querySelectorAll("submit");
+var highScores = document .querySelectorAll("high-scores");
+var remainingTime = 60;
+var games = [];
+var activeStepIndex = 1;
+// finish declaring variables
+
+//creating function to start quiz and go to the next question
+
+function askQuestions (activeQuestions){
+    questions.innerHTML = "";
+// going to use .createElement, .textContent, and .append to add Q&A to html.
+var questionTitle = document.createElement("p");
+var answerli = document.createElement("ul");
+var answer1 = document.createElement("li");
+var answer2 = document.createElement("li");
+var answer3 = document.createElement("li");
+var answer4 = document.createElement("li");
+
+questionTitle.textContent= activeQuestion.Question;
+answer1.textContent = activeQuestion.answers([1]);
+answer2.textContent = activeQuestion.answers([2]);
+answer3.textContent = activeQuestion.answers([3]);
+answer4.textContent = activeQuestion.answers([4]);
+
+answerList.append(answer1);
+answerList.append(answer2);
+answerList.append(answer3);
+answerList.append(answer4);
+questions.append(questionTitle);
+questions.append(answerList);
+}
+console.log (askQuestions)
