@@ -53,11 +53,13 @@ var games = [];
 var activeStepIndex = 1;
 // finish declaring variables
 
-//creating function to start quiz and go to the next question
+// started making functions below
+
+//creating function ASKQUESTION inside going to use .createElement, .textContent, and .append to add Q&A to html.
 
 function askQuestions (activeQuestions){
     questions.innerHTML = "";
-// going to use .createElement, .textContent, and .append to add Q&A to html.
+
 var questionTitle = document.createElement("p");
 var answerli = document.createElement("ul");
 var answer1 = document.createElement("li");
@@ -78,4 +80,15 @@ answerList.append(answer4);
 questions.append(questionTitle);
 questions.append(answerList);
 }
-console.log (askQuestions)
+// end of ASKQUESTION function
+
+// creating another function COUNTDOWN.
+function countdown(){
+    var interval =setInterval(function () {if (timeLeft > 1 && activeStepIndex !== 10){
+        tiktok.textContent = timeLeft;
+        timeLeft--;
+    } else {
+        clearInterval(timeInterval);
+    }
+},1000);
+}
