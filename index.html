@@ -12,7 +12,7 @@
             <!-- division for heading 1 and 2. -->
                 <div>
                     <h1>CODING QUIZ CHALLENGE</h1>
-                        <P>Answer the following questions within the time limit. every wrong answer will deduct 5 seconds from your time </P>
+                        <P>Answer the following questions within the time limit. Every wrong answer will deduct 10 seconds from your time </P>
                     <h2>QUESTIONS</h2>
                 </div>
         
@@ -26,11 +26,22 @@
             <!-- created  division for controls and created button to start quiz-->
             <div class="controls">
                 <P>Time Left <span id="countdown">60</span></P>
-                <button class="button" id="start-challenge">Start Quiz</button>
+                <button class="button" id="start-challenge">Start Coding Quiz</button>
             </div>
+            <!-- control section ends here -->
 
-            <div>score:<span id="score"></span></div>
-                        
+            <!-- starting form section -->
+            <form>
+                <div id="score">score:</div>
+                <label for="initial"></label>
+                <input placeholder="NAME"/>
+                <button id="submit">SUBMIT</button>
+                <ul id="HIGH SCORES">
+                    <P>HIGHSCORES</P>
+                </ul>
+
+            </form>
+            <!-- form section ends here  -->
               
             <!-- javascript is linked below -->
             <script src="./script.js"></script>

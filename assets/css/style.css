@@ -1,6 +1,11 @@
+* {
+    background-color: lightblue;
+}
+
 div {
     text-align: center;
 }
-li {
-    list-style-type: none;
+form {
+    text-align: center;
+    padding-top: 500px;
 }
