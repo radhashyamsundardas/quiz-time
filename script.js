@@ -40,7 +40,7 @@ let quizQuestions = [
 // finish writin question and answers
 
 // declaring variables through query selector.
-var startQuizEl = document.querySelectorAll("start-coding-quiz");
+var startQueEl = document.querySelectorAll("start-coding-quiz");
 var questions = document.querySelectorAll("questions");
 var solutions = document.querySelectorAll("answers");
 var tiktok = document.querySelectorAll("countdown");
@@ -92,3 +92,10 @@ function countdown(){
     }
 },1000);
 }
+// end of function countdown and all other functions too
+
+// going to add event listeners to the function
+startQueEl = document.querySelectorAll.addEventListener("click",function(){
+    countdown();
+    renderQuestions(quizQuestions[0]);
+});
