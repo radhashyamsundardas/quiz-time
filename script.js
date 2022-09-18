@@ -53,27 +53,62 @@ var games = [];
 var activeStepIndex = 1;
 // finish declaring variables
 
-// started making functions below
 
+
+// eventlistener startquizelement
 startQuizEl.addEventListener("click",function(){
-  
+
   askQuestions(quizQuestions[0]);
+  countdown();
 });
 
+// questions eventlistener
+
+questions.addEventListener("click", function(event){
+    if (activeStepIndex === 10){
+        ansers.textContent = " congrats game over";
+        score.textContent = timeLeft;
+
+    } else (
+        event.Target.textContent !== questions[activeStepIndex - 1].correctAnswer)
+        {
+            answers.textContent = "try agian.";
+            timeLeft -= 10;
+        } else{
+            answer.textContent = "you are correct";
+            console.log(timeleft);
+            activeStepIndex++;
+            renderQuestions(myQuestions[activeStepIndex - 1]);
+        }
+});
+
+// eventlistener submit
+submit.addEventListener("click", function(event)){
+    event.preventDefault();
+    var game = {
+        initials: initials.value.trim(),
+        score: timeLeft,
+    };
+    games.push(game);
+    storeGames();
+    renderGames();
+}
+
+// 
 //creating function ASKQUESTION inside going to use .createElement, .textContent, and .append to add Q&A to html.
 
 function askQuestions (activeQuestions){
     questions.innerHTML = "";
 
-var questionTitle = document.createElement("p");
+var questions = document.createElement("p");
 var answerList = document.createElement("ol");
 var answer1 = document.createElement("li");
 var answer2 = document.createElement("li");
 var answer3 = document.createElement("li");
 var answer4 = document.createElement("li");
-console.log(answerList)
 
-questionTitle.textContent= quizQuestions.question;
+
+quizQuestions.textContent= quizQuestions.question;
 answer1.textContent = activeQuestions.answer[1];
 answer2.textContent = activeQuestions.answer[2];
 answer3.textContent = activeQuestions.answer[3];
@@ -101,6 +136,7 @@ function countdown(){
         }
     }, 1000);
 }
+
 
 // start of function rendergames
 function renderGames (){
