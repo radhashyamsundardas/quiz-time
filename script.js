@@ -2,52 +2,52 @@
 // Adding questions and answers for the quiz, Questions got from interviewbit.com
 let quizQuestions = [
     { Question : "Which language is JAVASCRIPT?",
-        Answer:{
-            a: "Object Oriented",
-            b: "Object Based",
-            c: "Procedural",
-            d: "None of Above",
-        },  Answer: " Object Oriented",
+        answer:{
+            1: "Object Oriented",
+            2: "Object Based",
+            3: "Procedural",
+            4: "None of Above",
+        },  correctAnswer: " Object Oriented",
     },
 
     { Question : "Which of the following keyword is used to define variable in Javascript?",
-        Answer:{ 
-            a: "var",
-            b: "let",
-            c: "Both A and B",
-            d: "None of above",
-        }, Answer: "Both A and B",
+        answer:{ 
+            1: "var",
+            2: "let",
+            3: "Both A and B",
+            4: "None of above",
+        }, correctAnswer: "Both A and B",
     },
 
     { Question: "Which METHOD is used to access HTML elements using javascript?",
-        Answer: {
-            a: "getElementById()",
-            b: "getElementByClassname()",
-            c: "Both A and B",
-            d: "None of above",
-        }, Answer: "Both A and B",
+        answer: {
+            1: "getElementById()",
+            2: "getElementByClassname()",
+            3: "Both A and B",
+            4: "None of above",
+        }, correctAnswer: "Both A and B",
     },
 
    { Question: "How can Datatype be declared to be a constant type",
-        Answer: {
-            a: "const",
-            b: "var",
-            c: "let",
-            d: "constant",
-        }, Answer: "const",
+        answer: {
+            1: "const",
+            2: "var",
+            3: "let",
+            4: "constant",
+        }, correctAnswer: "const",
     },
 ];
 // finish writin question and answers
 
 // declaring variables through query selector.
-var startQueEl = document.querySelectorAll("start-coding-quiz");
-var questions = document.querySelectorAll("questions");
-var solutions = document.querySelectorAll("answers");
-var tiktok = document.querySelectorAll("countdown");
-var result = document.querySelectorAll("score");
-var autograph = document.querySelectorAll("initial");
-var submit = document.querySelectorAll("submit");
-var highScores = document .querySelectorAll("high-scores");
+var startQuizEl = document.getElementById("start-challenge");
+var questions = document.getElementById("questions");
+var solutions = document.getElementById("answers");
+var timerEl = document.getElementById("countdown");
+var result = document.getElementById("score");
+var autograph = document.getElementById("initial");
+var submit = document.getElementById("submit");
+var highScores = document .getElementById("high-scores");
 var remainingTime = 60;
 var games = [];
 var activeStepIndex = 1;
@@ -55,23 +55,29 @@ var activeStepIndex = 1;
 
 // started making functions below
 
+startQuizEl.addEventListener("click",function(){
+  
+  askQuestions(quizQuestions[0]);
+});
+
 //creating function ASKQUESTION inside going to use .createElement, .textContent, and .append to add Q&A to html.
 
 function askQuestions (activeQuestions){
     questions.innerHTML = "";
 
 var questionTitle = document.createElement("p");
-var answerli = document.createElement("ul");
+var answerList = document.createElement("ol");
 var answer1 = document.createElement("li");
 var answer2 = document.createElement("li");
 var answer3 = document.createElement("li");
 var answer4 = document.createElement("li");
+console.log(answerList)
 
-questionTitle.textContent= activeQuestion.Question;
-answer1.textContent = activeQuestion.answers([1]);
-answer2.textContent = activeQuestion.answers([2]);
-answer3.textContent = activeQuestion.answers([3]);
-answer4.textContent = activeQuestion.answers([4]);
+questionTitle.textContent= quizQuestions.question;
+answer1.textContent = activeQuestions.answer[1];
+answer2.textContent = activeQuestions.answer[2];
+answer3.textContent = activeQuestions.answer[3];
+answer4.textContent = activeQuestions.answer[4];
 
 answerList.append(answer1);
 answerList.append(answer2);
@@ -79,23 +85,43 @@ answerList.append(answer3);
 answerList.append(answer4);
 questions.append(questionTitle);
 questions.append(answerList);
-}
+ }
+
 // end of ASKQUESTION function
 
-// creating another function COUNTDOWN.
+// start of countdown function
 function countdown(){
-    var interval =setInterval(function () {if (timeLeft > 1 && activeStepIndex !== 10){
-        tiktok.textContent = timeLeft;
-        timeLeft--;
-    } else {
-        clearInterval(timeInterval);
-    }
-},1000);
-}
-// end of function countdown and all other functions too
+    var timeInterval = Set(function(){
+        if (timeLeft > 1 && activeStepIndex  !== 10){
+            timerEl.textContent = timeLeft;
+            timeLeft--;
 
-// going to add event listeners to the function
-startQueEl = document.querySelectorAll.addEventListener("click",function(){
-    countdown();
-    renderQuestions(quizQuestions[0]);
-});
+        } else {
+            clearInterval(timeInterval);
+        }
+    }, 1000);
+}
+
+// start of function rendergames
+function renderGames (){
+    for (var i=o; i< games.length; i++){
+        console.log(games[i]);
+        var highScore =document.createElement("li");
+        highScore.textContent= games[i].initials + " " + games[i].score;
+        highScores.append(highScore);
+    }
+    console.log(games.length);
+}
+// function to store games
+function store (){
+    console.log(games);
+    localStorage.setItem("games",JSON.stringify("games")
+    );
+}
+function initial(){
+    var storeGames = JSON.parse(localStorage.getItem("games"));
+    if(storeGames!== null){
+        games = storeGames;
+    }
+}
+initial();
