@@ -88,7 +88,7 @@ startQuizEl.addEventListener("click", function () {
 
 // listens to any click in the questions div
 questionsDiv.addEventListener("click", function (event){
-    if(activeStepIndex === 15){
+    if(activeStepIndex === 1){
         solutions.textContent ="Congrats! game over";
         result.textContent = remainingTime;
     } else
@@ -172,7 +172,7 @@ function play() {
     for (var i = 0; i < games.length; i++) {
         var highNum = document.createElement("li");
         highNum.textContent = games[i].initials + " " + games[i].score;
-        highNum.append(highNum);
+        highNum.append(autograph);
     }
     console.log(games.length);
 }
