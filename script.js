@@ -1,17 +1,19 @@
 
 // Adding questions and answers for the quiz, Questions got from interviewbit.com
 let quizQuestions = [
-    { Question : "Which language is JAVASCRIPT?",
-        answer:{
+    {
+       question: "Which language is JAVASCRIPT?",
+        answer: {
             1: "Object Oriented",
             2: "Object Based",
             3: "Procedural",
             4: "None of Above",
-        },  correctAnswer: " Object Oriented",
+        }, correctAnswer: " Object Oriented",
     },
 
-    { Question : "Which of the following keyword is used to define variable in Javascript?",
-        answer:{ 
+    {
+       question: "Which of the following keyword is used to define variable in Javascript?",
+        answer: {
             1: "var",
             2: "let",
             3: "Both A and B",
@@ -19,7 +21,8 @@ let quizQuestions = [
         }, correctAnswer: "Both A and B",
     },
 
-    { Question: "Which METHOD is used to access HTML elements using javascript?",
+    {
+       question: "Which METHOD is used to access HTML elements using javascript?",
         answer: {
             1: "getElementById()",
             2: "getElementByClassname()",
@@ -28,7 +31,8 @@ let quizQuestions = [
         }, correctAnswer: "Both A and B",
     },
 
-   { Question: "How can Datatype be declared to be a constant type",
+    {
+       question: "How can Datatype be declared to be a constant type",
         answer: {
             1: "const",
             2: "var",
@@ -41,14 +45,18 @@ let quizQuestions = [
 
 // declaring variables through query selector.
 var startQuizEl = document.getElementById("start-challenge");
-var questions = document.getElementById("questions");
+var questionsDiv = document.getElementById("questions");
 var solutions = document.getElementById("answers");
 var timerEl = document.getElementById("countdown");
 var result = document.getElementById("score");
 var autograph = document.getElementById("initial");
 var submit = document.getElementById("submit");
-var highScores = document .getElementById("high-scores");
+var highScores = document.getElementById("high-scores");
+// create a variable to hold timer value
 var remainingTime = 60;
+
+var questionCount = 0
+
 var games = [];
 var activeStepIndex = 1;
 // finish declaring variables
@@ -56,34 +64,49 @@ var activeStepIndex = 1;
 
 
 // eventlistener startquizelement
-startQuizEl.addEventListener("click",function(){
-
-  askQuestions(quizQuestions[0]);
-  countdown();
+startQuizEl.addEventListener("click", function () {
+    askQuestions(quizQuestions[questionCount]);
+    countdown();
 });
 
 // questions eventlistener
 
-questions.addEventListener("click", function(event){
-    if (activeStepIndex === 10){
-        ansers.textContent = " congrats game over";
-        score.textContent = timeLeft;
+// listens to any click in the questions div
+questionsDiv.addEventListener("click", function (event) {
+    console.log(event)
+    // look at the event obj to find out what was clicked (target ore scr el)
+    // look at that targetEl and see what they selected (innertext)
+    // compare the user choice to the answer (if)
+    // -- do one thing if correct
+    // -- do another if incorrect
+    // ** move to the next question **
+    // incrementing you count
+    // calling ask quetions again
 
-    } else (
-        event.Target.textContent !== questions[activeStepIndex - 1].correctAnswer)
-        {
-            answers.textContent = "try agian.";
-            timeLeft -= 10;
-        } else{
-            answer.textContent = "you are correct";
-            console.log(timeleft);
-            activeStepIndex++;
-            renderQuestions(myQuestions[activeStepIndex - 1]);
-        }
+
+
+
+
+
+    // if (activeStepIndex === 10) {
+    //     answers.textContent = " congrats game over";
+    //     score.textContent = timeLeft;
+
+    // } else {
+    //     // if (event.Target.textContent !== questions[activeStepIndex - 1].correctAnswer) {
+    //     //     answers.textContent = "try agian.";
+    //     //     timeLeft -= 10;
+    //     // } else {
+    //     //     answer.textContent = "you are correct";
+    //     //     console.log(timeleft);
+    //     //     activeStepIndex++;
+    //     //     renderQuestions(myQuestions[activeStepIndex - 1]);
+    //     // }
+    // }
 });
 
 // eventlistener submit
-submit.addEventListener("click", function(event)){
+submit.addEventListener("click", function (event) {
     event.preventDefault();
     var game = {
         initials: initials.value.trim(),
@@ -92,42 +115,47 @@ submit.addEventListener("click", function(event)){
     games.push(game);
     storeGames();
     renderGames();
-}
+})
 
 // 
 //creating function ASKQUESTION inside going to use .createElement, .textContent, and .append to add Q&A to html.
 
-function askQuestions (activeQuestions){
-    questions.innerHTML = "";
+function askQuestions(activeQuestion) {
+    console.log(activeQuestion);
+    // clear the question div
+    questionsDiv.innerHTML = "";
 
-var questions = document.createElement("p");
-var answerList = document.createElement("ol");
-var answer1 = document.createElement("li");
-var answer2 = document.createElement("li");
-var answer3 = document.createElement("li");
-var answer4 = document.createElement("li");
+    // create new elements for this question
+    var questionTitle = document.createElement("p");
+    var answerList = document.createElement("ol");
+    var answer1 = document.createElement("li");
+    var answer2 = document.createElement("li");
+    var answer3 = document.createElement("li");
+    var answer4 = document.createElement("li");
 
 
-quizQuestions.textContent= quizQuestions.question;
-answer1.textContent = activeQuestions.answer[1];
-answer2.textContent = activeQuestions.answer[2];
-answer3.textContent = activeQuestions.answer[3];
-answer4.textContent = activeQuestions.answer[4];
+    // modif the newly created el
+    questionTitle.textContent = activeQuestion.question;
+    answer1.textContent = activeQuestion.answer[1];
+    answer2.textContent = activeQuestion.answer[2];
+    answer3.textContent = activeQuestion.answer[3];
+    answer4.textContent = activeQuestion.answer[4];
 
-answerList.append(answer1);
-answerList.append(answer2);
-answerList.append(answer3);
-answerList.append(answer4);
-questions.append(questionTitle);
-questions.append(answerList);
- }
+    // attaching the child el to the parent el
+    answerList.append(answer1);
+    answerList.append(answer2);
+    answerList.append(answer3);
+    answerList.append(answer4);
+    questionsDiv.append(questionTitle);
+    questionsDiv.append(answerList);
+}
 
 // end of ASKQUESTION function
 
 // start of countdown function
-function countdown(){
-    var timeInterval = Set(function(){
-        if (timeLeft > 1 && activeStepIndex  !== 10){
+function countdown() {
+    var timeInterval = Set(function () {
+        if (timeLeft > 1 && activeStepIndex !== 10) {
             timerEl.textContent = timeLeft;
             timeLeft--;
 
@@ -139,25 +167,29 @@ function countdown(){
 
 
 // start of function rendergames
-function renderGames (){
-    for (var i=o; i< games.length; i++){
+function renderGames() {
+    for (var i = o; i < games.length; i++) {
         console.log(games[i]);
-        var highScore =document.createElement("li");
-        highScore.textContent= games[i].initials + " " + games[i].score;
+        var highScore = document.createElement("li");
+        highScore.textContent = games[i].initials + " " + games[i].score;
         highScores.append(highScore);
     }
     console.log(games.length);
 }
 // function to store games
-function store (){
+function store() {
     console.log(games);
-    localStorage.setItem("games",JSON.stringify("games")
+    localStorage.setItem("games", JSON.stringify("games")
     );
 }
-function initial(){
+function initial() {
+    // reach into local storage to get games, parse it to js, store it in a var
     var storeGames = JSON.parse(localStorage.getItem("games"));
-    if(storeGames!== null){
+    // if the value of store is not null
+    if (storeGames !== null) {
+        // put storeGames value into games var
         games = storeGames;
     }
 }
+
 initial();
