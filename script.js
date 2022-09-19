@@ -150,7 +150,7 @@ function askQuestions(activeQuestion) {
 // start of countdown function
 function finalCount() {
     var timeInterval = setInterval (function() {
-        if (remainingTime > 1 && activeStepIndex !== 10) {
+        if (remainingTime >= 0 && activeStepIndex !== 10) {
             timerEl.textContent = remainingTime;
             remainingTime--;
 
