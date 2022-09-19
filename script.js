@@ -66,7 +66,7 @@ var activeStepIndex = 1;
 // eventlistener startquizelement
 startQuizEl.addEventListener("click", function () {
     askQuestions(quizQuestions[questionCount]);
-    countdown();
+    finalCount();
 });
 
 // questions eventlistener
@@ -91,7 +91,7 @@ questionsDiv.addEventListener("click", function (event){
     ){
         solutions.textContent = "try again";
         remainingTime -= 10;
-    } else{
+    } else {
         solutions.textContent = "correct";
         activeStepIndex++;
         askQuestions(quizQuestions[activeStepIndex -1]);
@@ -100,12 +100,7 @@ questionsDiv.addEventListener("click", function (event){
 
 });
 
-    
-
-
-
-
-// eventlistener submit
+    // eventlistener submit
 submit.addEventListener("click", function (event) {
     event.preventDefault();
     var game = {
@@ -153,8 +148,8 @@ function askQuestions(activeQuestion) {
 // end of ASKQUESTION function
 
 // start of countdown function
-function countdown() {
-    var timeInterval = Set(function () {
+function finalCount() {
+    var timeInterval = setInterval (function() {
         if (timeLeft > 1 && activeStepIndex !== 10) {
             timerEl.textContent = timeLeft;
             timeLeft--;
