@@ -2,7 +2,7 @@
 // Adding questions and answers for the quiz, Questions got from interviewbit.com
 let quizQuestions = [
     {
-       question: "Which language is JAVASCRIPT?",
+        question: "Which language is JAVASCRIPT?",
         answer: {
             1: "Object Oriented",
             2: "Object Based",
@@ -12,7 +12,7 @@ let quizQuestions = [
     },
 
     {
-       question: "Which of the following keyword is used to define variable in Javascript?",
+        question: "Which of the following keyword is used to define variable in Javascript?",
         answer: {
             1: "var",
             2: "let",
@@ -22,7 +22,7 @@ let quizQuestions = [
     },
 
     {
-       question: "Which METHOD is used to access HTML elements using javascript?",
+        question: "Which METHOD is used to access HTML elements using javascript?",
         answer: {
             1: "getElementById()",
             2: "getElementByClassname()",
@@ -32,7 +32,7 @@ let quizQuestions = [
     },
 
     {
-       question: "How can Datatype be declared to be a constant type",
+        question: "How can Datatype be declared to be a constant type",
         answer: {
             1: "const",
             2: "var",
@@ -71,11 +71,8 @@ startQuizEl.addEventListener("click", function () {
 
 // questions eventlistener
 
-// listens to any click in the questions div
-questionsDiv.addEventListener("click", function (event) {
-    console.log(event)
-    // look at the event obj to find out what was clicked (target ore scr el)
-    // look at that targetEl and see what they selected (innertext)
+// look at the event obj to find out what was clicked (target ore scr el) li
+    // look at that targetEl and see what they selected (innertext) object based
     // compare the user choice to the answer (if)
     // -- do one thing if correct
     // -- do another if incorrect
@@ -84,26 +81,29 @@ questionsDiv.addEventListener("click", function (event) {
     // calling ask quetions again
 
 
+// listens to any click in the questions div
+questionsDiv.addEventListener("click", function (event){
+    if(activeStepIndex === 10){
+        solutions.textContent ="Congrats! game over";
+        result.textContent = remainingTime;
+    } else if (
+        event.target.textContent !== quizQuestions[activeStepIndex - 1].correctAnswer
+    ){
+        solutions.textContent = "try again";
+        remainingTime -= 10;
+    } else{
+        solutions.textContent = "correct";
+        activeStepIndex++;
+        askQuestions(quizQuestions[activeStepIndex -1]);
+    }
+    console.log(questionsDiv)
 
-
-
-
-    // if (activeStepIndex === 10) {
-    //     answers.textContent = " congrats game over";
-    //     score.textContent = timeLeft;
-
-    // } else {
-    //     // if (event.Target.textContent !== questions[activeStepIndex - 1].correctAnswer) {
-    //     //     answers.textContent = "try agian.";
-    //     //     timeLeft -= 10;
-    //     // } else {
-    //     //     answer.textContent = "you are correct";
-    //     //     console.log(timeleft);
-    //     //     activeStepIndex++;
-    //     //     renderQuestions(myQuestions[activeStepIndex - 1]);
-    //     // }
-    // }
 });
+
+    
+
+
+
 
 // eventlistener submit
 submit.addEventListener("click", function (event) {
@@ -117,7 +117,7 @@ submit.addEventListener("click", function (event) {
     renderGames();
 })
 
-// 
+//
 //creating function ASKQUESTION inside going to use .createElement, .textContent, and .append to add Q&A to html.
 
 function askQuestions(activeQuestion) {
