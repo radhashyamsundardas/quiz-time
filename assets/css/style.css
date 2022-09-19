@@ -11,3 +11,16 @@ form {
     text-align: center;
     
 }
+/* media size */
+@media screen and (max-width: 992px;){
+    body{
+        background-color: aqua;
+    }
+}
+@media screen and (max-width: 768px;){
+    body{
+        background-color: rgb(205, 103, 60);
+    }
+}
+
+

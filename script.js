@@ -51,7 +51,7 @@ var timerEl = document.getElementById("countdown");
 var result = document.getElementById("score");
 var autograph = document.getElementById("initial");
 var submit = document.getElementById("submit");
-var highScores = document.getElementById("high-scores");
+var highNum = document.getElementById("highnumbers");
 // create a variable to hold timer value
 var remainingTime = 60;
 
@@ -81,15 +81,21 @@ startQuizEl.addEventListener("click", function () {
     // calling ask quetions again
 
 
+
+    // first problem question doesn't change question and it just show's gameover or wrong answer on bottom no matter what you click,
+    // second problems is it doesn't save scores with initials  
+
+
 // listens to any click in the questions div
 questionsDiv.addEventListener("click", function (event){
-    if(activeStepIndex === 10){
+    if(activeStepIndex === 15){
         solutions.textContent ="Congrats! game over";
         result.textContent = remainingTime;
-    } else if (
+    } else
+    if (
         event.target.textContent !== quizQuestions[activeStepIndex - 1].correctAnswer
     ){
-        solutions.textContent = "try again";
+        solutions.textContent = "incorrect answer";
         remainingTime -= 10;
     } else {
         solutions.textContent = "correct";
@@ -103,13 +109,13 @@ questionsDiv.addEventListener("click", function (event){
     // eventlistener submit
 submit.addEventListener("click", function (event) {
     event.preventDefault();
-    var game = {
-        initials: initials.value.trim(),
-        score: timeLeft,
-    };
-    games.push(game);
-    storeGames();
-    renderGames();
+    var game = [{
+        initials: initials(),
+        score: remainingTime,
+    }];
+    game.push(game);
+    store();
+    play();
 })
 
 //
@@ -162,12 +168,11 @@ function finalCount() {
 
 
 // start of function rendergames
-function renderGames() {
-    for (var i = o; i < games.length; i++) {
-        console.log(games[i]);
-        var highScore = document.createElement("li");
-        highScore.textContent = games[i].initials + " " + games[i].score;
-        highScores.append(highScore);
+function play() {
+    for (var i = 0; i < games.length; i++) {
+        var highNum = document.createElement("li");
+        highNum.textContent = games[i].initials + " " + games[i].score;
+        highNum.append(highNum);
     }
     console.log(games.length);
 }
@@ -177,7 +182,7 @@ function store() {
     localStorage.setItem("games", JSON.stringify("games")
     );
 }
-function initial() {
+function initials() {
     // reach into local storage to get games, parse it to js, store it in a var
     var storeGames = JSON.parse(localStorage.getItem("games"));
     // if the value of store is not null
@@ -187,4 +192,4 @@ function initial() {
     }
 }
 
-initial();
+initials();
