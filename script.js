@@ -62,7 +62,7 @@ var remainingTime = 60;
 var questionCount = 0
 
 var games = [];
-var activeStepIndex = 1;
+
 // finish declaring variables
 
 
@@ -106,6 +106,7 @@ questionsDiv.addEventListener("click", function (event){
         solutions.textContent = "incorrect answer";
         remainingTime -= 10;
     }
+    
     // ** move to the next question **
     // incrementing you count
     questionCount++;
@@ -113,39 +114,11 @@ questionsDiv.addEventListener("click", function (event){
     // if questionCount is greater than or equal to quiz questions length
     // -- not call question
 
-
+    if (questionCount >= quizQuestions.length){
+        solutions.textContent = "Game Over";
+    }
     // calling ask quetions again
     askQuestions(quizQuestions[questionCount]);
-
-    // 
-
-
-
-
-
-
-
-
-
-
-
-
-    // if(activeStepIndex === -1){
-    //     solutions.textContent ="Congrats! game over";
-    //     result.textContent = remainingTime;
-    // } else
-    // if (
-    //     event.target.textContent !== quizQuestions[activeStepIndex  -1].correctAnswer
-    // ){
-    //     solutions.textContent = "incorrect answer";
-    //     remainingTime -= 10;
-    // } else {
-    //     solutions.textContent = "correct";
-    //     activeStepIndex++;
-    //     askQuestions(quizQuestions[activeStepIndex -1]);
-    // }
-    // console.log(questionsDiv)
-
 });
 
     // eventlistener submit
@@ -177,7 +150,7 @@ function askQuestions(activeQuestion) {
     var answer4 = document.createElement("li");
 
 
-    // modif the newly created el
+    // modify the newly created el
     questionTitle.textContent = activeQuestion.question;
     answer1.textContent = activeQuestion.answer[1];
     answer2.textContent = activeQuestion.answer[2];
@@ -198,7 +171,7 @@ function askQuestions(activeQuestion) {
 // start of finalCount function
 function finalCount() {
     var timeInterval = setInterval (function() {
-        if (remainingTime >= 0 && activeStepIndex !== 10) {
+        if (remainingTime >= 0 && questionCount !== 10) {
             timerEl.textContent = remainingTime;
             remainingTime--;
 
@@ -222,7 +195,7 @@ function play() {
 scoreStructure = [
     {
         initials: "",
-        score: ""
+        timeLeft: ""
     },
 ]
 // function to store games
@@ -233,11 +206,11 @@ function store() {
 }
 function initials() {
     // reach into local storage to get games, parse it to js, store it in a var
-    var storeGames = JSON.parse(localStorage.getItem("ScoreStructure"));
+    var store= JSON.parse(localStorage.getItem("ScoreStructure"));
     // if the value of store is not null
-    if (storeGames !== null) {
-        // put storeGames value into games var
-        games = storeGames;
+    if (store!== null) {
+        // put storevalue into games var
+        games = store;
     }
 }
 
