@@ -172,10 +172,10 @@ function finalCount() {
         }
     }, 1000);
 }
-
+// wasnt able to figure out how to put it in local storage and retrieve it.
 submit.addEventListener("click", function (event) {
     event.preventDefault();
-    var game = ["autograph: initials", "score: remainingTime"];
+    var playerStats = {autograph: initials, score: remainingTime}
 
 
 
@@ -183,7 +183,7 @@ submit.addEventListener("click", function (event) {
     //     initials: initials(),
     //     score: remainingTime,
     // }];
-    game.push(game);
+    games.push(playerStats);
     play();
     initials();
 })
@@ -195,6 +195,7 @@ function play() {
         var highNum = document.createElement("li");
         highNum.textContent = games[i].initials + " " + games[i].score;
         highNum.append(autograph);
+        console.log()
     }
 }
 
