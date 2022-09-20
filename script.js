@@ -83,7 +83,7 @@ startQuizEl.addEventListener("click", function () {
 
 
 // listens to any click in the questions div
-questionsDiv.addEventListener("click", function (event){
+questionsDiv.addEventListener("click", function (event) {
     // check what info we have
     console.log(event);
     // look at the event obj to find out what was clicked (target ore scr el) li
@@ -96,24 +96,24 @@ questionsDiv.addEventListener("click", function (event){
     // get the correct answer
     let correctAnswer = quizQuestions[questionCount].correctAnswer;
     // compare the user choice to the answer (if)
-    if (userChoice === correctAnswer){
+    if (userChoice === correctAnswer) {
         // -- do one thing if correct
         console.log(' you are correct')
-        solutions.textContent = "correct";        
+        solutions.textContent = "correct";
     } else {
         // -- do another if incorrect
         console.log('wrong')
         solutions.textContent = "incorrect answer";
         remainingTime -= 10;
     }
-    
-    
+
+
     // ** move to the next question **
     // incrementing you count
     questionCount++;
-    
+
     // gameover if statement
-    if (questionCount >= quizQuestions.length){
+    if (questionCount >= quizQuestions.length) {
         solutions.textContent = "Game Over";
     }
 
@@ -122,7 +122,7 @@ questionsDiv.addEventListener("click", function (event){
     askQuestions(quizQuestions[questionCount]);
 });
 
-    // eventlistener submit
+// eventlistener submit
 
 
 //
@@ -161,10 +161,10 @@ function askQuestions(activeQuestion) {
 
 // start of finalCount function
 function finalCount() {
-    var timeInterval = setInterval (function() {
+    var timeInterval = setInterval(function () {
         if (remainingTime >= 0 && questionCount !== 4) {
             timerEl.textContent = remainingTime;
-            result.textContent=remainingTime;
+            result.textContent = remainingTime;
             remainingTime--;
 
         } else {
@@ -175,14 +175,19 @@ function finalCount() {
 
 submit.addEventListener("click", function (event) {
     event.preventDefault();
-    var game = [{
-        initials: initials(),
-        score: remainingTime,
-    }];
+    var game = ["autograph: initials", "score: remainingTime"];
+
+
+
+    // var game = [{
+    //     initials: initials(),
+    //     score: remainingTime,
+    // }];
     game.push(game);
     play();
     initials();
 })
+
 
 // start of function play/ not able to figure out this part.
 function play() {
@@ -194,13 +199,13 @@ function play() {
 }
 
 // function to store games
-function store(){
-    localStorage.setItem("games",JSON.stringify(games));
+function store() {
+    localStorage.setItem("games", JSON.stringify(games));
 }
 
 function initials() {
     // reach into local storage to get games, parse it to js, store it in a var
-    var store= JSON.parse(localStorage.getItem("games"));
+    var store = JSON.parse(localStorage.getItem("games"));
     // if the value of store is not null
     if (store !== null) {
         // put storevalue into games var
