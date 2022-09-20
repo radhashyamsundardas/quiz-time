@@ -8,7 +8,8 @@ let quizQuestions = [
             2: "Object Based",
             3: "Procedural",
             4: "None of Above",
-        }, correctAnswer: " Object Oriented",
+        },
+        correctAnswer: " Object Oriented",
     },
 
     {
@@ -18,7 +19,8 @@ let quizQuestions = [
             2: "let",
             3: "Both A and B",
             4: "None of above",
-        }, correctAnswer: "Both A and B",
+        },
+        correctAnswer: "Both A and B",
     },
 
     {
@@ -28,7 +30,8 @@ let quizQuestions = [
             2: "getElementByClassname()",
             3: "Both A and B",
             4: "None of above",
-        }, correctAnswer: "Both A and B",
+        },
+        correctAnswer: "Both A and B",
     },
 
     {
@@ -38,12 +41,13 @@ let quizQuestions = [
             2: "var",
             3: "let",
             4: "constant",
-        }, correctAnswer: "const",
+        },
+        correctAnswer: "const",
     },
 ];
-// finish writin question and answers
+// finish writing question and answers
 
-// declaring variables through query selector.
+// declaring variables through getElementById selector.
 var startQuizEl = document.getElementById("start-challenge");
 var questionsDiv = document.getElementById("questions");
 var solutions = document.getElementById("answers");
@@ -71,38 +75,76 @@ startQuizEl.addEventListener("click", function () {
 
 // questions eventlistener
 
-// look at the event obj to find out what was clicked (target ore scr el) li
-    // look at that targetEl and see what they selected (innertext) object based
-    // compare the user choice to the answer (if)
-    // -- do one thing if correct
-    // -- do another if incorrect
-    // ** move to the next question **
-    // incrementing you count
-    // calling ask quetions again
 
 
 
-    // first problem question doesn't change question and it just show's gameover or wrong answer on bottom no matter what you click,
-    // second problems is it doesn't save scores with initials  
+// first problem question doesn't change question and it just show's gameover or wrong answer on bottom no matter what you click,
+// second problems is it doesn't save scores with initials  
 
 
 // listens to any click in the questions div
 questionsDiv.addEventListener("click", function (event){
-    if(activeStepIndex === 1){
-        solutions.textContent ="Congrats! game over";
-        result.textContent = remainingTime;
-    } else
-    if (
-        event.target.textContent !== quizQuestions[activeStepIndex - 1].correctAnswer
-    ){
+    // check what info we have
+    console.log(event);
+    // look at the event obj to find out what was clicked (target ore scr el) li
+    let eventTarget = event.target;
+    // sanity check
+    // look at that targetEl and see what they selected (innertext) 
+    console.dir(eventTarget);
+    // extract a property that will tell us what they clicked (innertext or innerhtml or textcontent)
+    let userChoice = eventTarget.innerText;
+    // get the correct answer
+    let correctAnswer = quizQuestions[questionCount].correctAnswer;
+    // compare the user choice to the answer (if)
+    if (userChoice === correctAnswer){
+        // -- do one thing if correct
+        console.log(' you are correct')
+        solutions.textContent = "correct";        
+    } else {
+        // -- do another if incorrect
+        console.log('wrong')
         solutions.textContent = "incorrect answer";
         remainingTime -= 10;
-    } else {
-        solutions.textContent = "correct";
-        activeStepIndex++;
-        askQuestions(quizQuestions[activeStepIndex -1]);
     }
-    console.log(questionsDiv)
+    // ** move to the next question **
+    // incrementing you count
+    questionCount++;
+
+    // if questionCount is greater than or equal to quiz questions length
+    // -- not call question
+
+
+    // calling ask quetions again
+    askQuestions(quizQuestions[questionCount]);
+
+    // 
+
+
+
+
+
+
+
+
+
+
+
+
+    // if(activeStepIndex === -1){
+    //     solutions.textContent ="Congrats! game over";
+    //     result.textContent = remainingTime;
+    // } else
+    // if (
+    //     event.target.textContent !== quizQuestions[activeStepIndex  -1].correctAnswer
+    // ){
+    //     solutions.textContent = "incorrect answer";
+    //     remainingTime -= 10;
+    // } else {
+    //     solutions.textContent = "correct";
+    //     activeStepIndex++;
+    //     askQuestions(quizQuestions[activeStepIndex -1]);
+    // }
+    // console.log(questionsDiv)
 
 });
 
@@ -153,7 +195,7 @@ function askQuestions(activeQuestion) {
 
 // end of ASKQUESTION function
 
-// start of countdown function
+// start of finalCount function
 function finalCount() {
     var timeInterval = setInterval (function() {
         if (remainingTime >= 0 && activeStepIndex !== 10) {
@@ -167,7 +209,7 @@ function finalCount() {
 }
 
 
-// start of function rendergames
+// start of function play
 function play() {
     for (var i = 0; i < games.length; i++) {
         var highNum = document.createElement("li");
@@ -176,15 +218,22 @@ function play() {
     }
     console.log(games.length);
 }
+
+scoreStructure = [
+    {
+        initials: "",
+        score: ""
+    },
+]
 // function to store games
 function store() {
     console.log(games);
-    localStorage.setItem("games", JSON.stringify("games")
+    localStorage.setItem("games", JSON.stringify("scoreStructure")
     );
 }
 function initials() {
     // reach into local storage to get games, parse it to js, store it in a var
-    var storeGames = JSON.parse(localStorage.getItem("games"));
+    var storeGames = JSON.parse(localStorage.getItem("ScoreStructure"));
     // if the value of store is not null
     if (storeGames !== null) {
         // put storeGames value into games var
@@ -193,3 +242,4 @@ function initials() {
 }
 
 initials();
+
