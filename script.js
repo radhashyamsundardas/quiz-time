@@ -192,23 +192,15 @@ function play() {
     console.log(games.length);
 }
 
-scoreStructure = [
-    {
-        initials: "",
-        timeLeft: ""
-    },
-]
 // function to store games
-function store() {
-    console.log(games);
-    localStorage.setItem("games", JSON.stringify("scoreStructure")
-    );
+const store = {
+    name:""
 }
 function initials() {
     // reach into local storage to get games, parse it to js, store it in a var
-    var store= JSON.parse(localStorage.getItem("ScoreStructure"));
+    var store= JSON.parse(localStorage.getItem("games"));
     // if the value of store is not null
-    if (store!== null) {
+    if (store !== null) {
         // put storevalue into games var
         games = store;
     }
