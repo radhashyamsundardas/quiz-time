@@ -162,8 +162,9 @@ function askQuestions(activeQuestion) {
 // start of finalCount function
 function finalCount() {
     var timeInterval = setInterval (function() {
-        if (remainingTime >= 0 && questionCount !== 10) {
+        if (remainingTime >= 0 && questionCount !== 4) {
             timerEl.textContent = remainingTime;
+            result.textContent=remainingTime;
             remainingTime--;
 
         } else {
@@ -183,7 +184,7 @@ submit.addEventListener("click", function (event) {
     initials();
 })
 
-// start of function play
+// start of function play/ not able to figure out this part.
 function play() {
     for (var i = 0; i < games.length; i++) {
         var highNum = document.createElement("li");
@@ -194,7 +195,7 @@ function play() {
 
 // function to store games
 function store(){
-    localStorage.setItem("NAME",JSON.stringify(games));
+    localStorage.setItem("games",JSON.stringify(games));
 }
 
 function initials() {

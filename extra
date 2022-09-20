@@ -1,0 +1,47 @@
+
+// Adding questions and answers for the quiz, Questions got from interviewbit.com
+let quizQuestions = [
+    {
+        question: "Which language is JAVASCRIPT?",
+        answer: {
+            1: "Object Oriented",
+            2: "Object Based",
+            3: "Procedural",
+            4: "None of Above",
+        },
+        correctAnswer: " Object Oriented",
+    },
+
+    {
+        question: "Which of the following keyword is used to define variable in Javascript?",
+        answer: {
+            1: "var",
+            2: "let",
+            3: "Both A and B",
+            4: "None of above",
+        },
+        correctAnswer: "Both A and B",
+    },
+
+    {
+        question: "Which METHOD is used to access HTML elements using javascript?",
+        answer: {
+            1: "getElementById()",
+            2: "getElementByClassname()",
+            3: "Both A and B",
+            4: "None of above",
+        },
+        correctAnswer: "Both A and B",
+    },
+
+    {
+        question: "How can Datatype be declared to be a constant type",
+        answer: {
+            1: "const",
+            2: "var",
+            3: "let",
+            4: "constant",
+        },
+        correctAnswer: "const",
+    },
+];
