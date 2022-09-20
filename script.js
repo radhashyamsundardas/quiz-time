@@ -107,16 +107,17 @@ questionsDiv.addEventListener("click", function (event){
         remainingTime -= 10;
     }
     
+    
     // ** move to the next question **
     // incrementing you count
     questionCount++;
-
-    // if questionCount is greater than or equal to quiz questions length
-    // -- not call question
-
+    
+    // gameover if statement
     if (questionCount >= quizQuestions.length){
         solutions.textContent = "Game Over";
     }
+
+
     // calling ask quetions again
     askQuestions(quizQuestions[questionCount]);
 });
