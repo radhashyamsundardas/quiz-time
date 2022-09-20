@@ -123,22 +123,12 @@ questionsDiv.addEventListener("click", function (event){
 });
 
     // eventlistener submit
-submit.addEventListener("click", function (event) {
-    event.preventDefault();
-    var game = [{
-        initials: initials(),
-        score: remainingTime,
-    }];
-    game.push(game);
-    store();
-    play();
-})
+
 
 //
 //creating function ASKQUESTION inside going to use .createElement, .textContent, and .append to add Q&A to html.
 
 function askQuestions(activeQuestion) {
-    console.log(activeQuestion);
     // clear the question div
     questionsDiv.innerHTML = "";
 
@@ -182,6 +172,16 @@ function finalCount() {
     }, 1000);
 }
 
+submit.addEventListener("click", function (event) {
+    event.preventDefault();
+    var game = [{
+        initials: initials(),
+        score: remainingTime,
+    }];
+    game.push(game);
+    play();
+    initials();
+})
 
 // start of function play
 function play() {
@@ -190,13 +190,13 @@ function play() {
         highNum.textContent = games[i].initials + " " + games[i].score;
         highNum.append(autograph);
     }
-    console.log(games.length);
 }
 
 // function to store games
-const store = {
-    name:""
+function store(){
+    localStorage.setItem("NAME",JSON.stringify(games));
 }
+
 function initials() {
     // reach into local storage to get games, parse it to js, store it in a var
     var store= JSON.parse(localStorage.getItem("games"));
